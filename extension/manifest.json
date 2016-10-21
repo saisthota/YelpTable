@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+  "name": "YelpTable",
+  "version": "1.0",
+
+  "default_locale": "en",
+  "description": "Replace OpenTable Restaurant reviews with Yelp Reviews",
+  "icons": {},
+
+  "browser_action": {},
+  "page_action": {},
+
+  "author": "Sai Thota",
+  "background": {
+    "persistent": false
+  },
+
+  "background_page": "reviews.html"
+}
