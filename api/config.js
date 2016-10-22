@@ -1,3 +1,9 @@
-/**
- * Created by saisthota on 10/21/16.
- */
+module.exports = {
+    getConsumerKey: function() {
+        return 'ConsumerKey';
+    },
+
+    getConsumerSecret: function() {
+    return 'ConsumerSecret';
+    }
+}
