@@ -3,7 +3,11 @@ module.exports = {
         return 'ConsumerKey';
     },
 
-    getConsumerSecret: function() {
-    return 'ConsumerSecret';
+    getToken: function() {
+        return 'ConsumerSecret';
+    },
+
+    getRequestTime: function() {
+        return (new Date).getTime();
     }
 }
