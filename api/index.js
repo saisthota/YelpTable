@@ -19,7 +19,11 @@ router.get('/', function(req, res) {
 
 router.get('/restaurant/:name', function(req, res) {
 
-    console.log(req.params.name);
+    var biz = req.params.name.toLowerCase();
+
+    biz = biz.split(' ').join('-');
+
+    console.log(biz);
     var yelp = new Yelp({
         consumer_key: config.getConsumerKey(),
         consumer_secret: config.getConsumerSecret(),
@@ -27,9 +31,9 @@ router.get('/restaurant/:name', function(req, res) {
         token_secret: config.getTokenSecret()
     });
 
-    yelp.business('prime-santa-clara', function(err, data) {
+    yelp.business(biz, function(err, data) {
         if (err) return console.log(error);
-            res.json(data.reviews);
+            res.status(200).json(data.reviews);
     });
 
 });
