@@ -22,6 +22,7 @@ router.get('/restaurant/:name', function(req, res) {
     var biz = req.params.name.toLowerCase();
 
     biz = biz.split(' ').join('-');
+    biz = biz.split('---').join('-');
 
     console.log(biz);
     var yelp = new Yelp({
@@ -33,7 +34,21 @@ router.get('/restaurant/:name', function(req, res) {
 
     yelp.business(biz, function(err, data) {
         if (err) return console.log(error);
-            res.status(200).json(data.reviews);
+
+            var response = [];
+            var i = 0;
+            var row = "";
+
+            for(i=0; i<data.reviews.length; i++) {
+                row = "<img src='"+data.reviews[i].rating_image_url+"' style='float:left'><br>";
+                row += "<div style='width:20%'><img src='"+data.reviews[i].user.image_url+"' style='float:left;width:50px;height:50px;margin-right:10px'></div>";
+                row += "<div style='width:80%'><b>"+data.reviews[i].user.name+"</b><br>"+data.reviews[i].excerpt+"</div>";
+                row = row.split('\n').join(' ');
+                response.push(row);
+            }
+
+            console.log(response);
+            res.status(200).json(response);
     });
 
 });
