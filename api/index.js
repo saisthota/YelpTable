@@ -41,7 +41,7 @@ router.get('/restaurant/:name', function(req, res) {
             var row = "";
 
             for(i=0; i<data.reviews.length; i++) {
-                row = "<img src='"+data.reviews[i].rating_image_url+"' alt='"+data.reviews[i].user+" rated "+data.reviews[i].rating+" stars'><br>";
+                row = "<img src='"+data.reviews[i].rating_image_url+"' alt='"+data.reviews[i].user.name+" rated "+data.reviews[i].rating+" stars'><br>";
                 row += "<div style='width:20%'><img src='"+data.reviews[i].user.image_url+"' style='float:left;width:50px;height:50px;margin-right:10px'></div>";
                 row += "<div style='width:80%'><b>"+data.reviews[i].user.name+"</b><br>"+data.reviews[i].excerpt+"</div>";
                 row = row.split('\n').join(' ');
