@@ -23,6 +23,7 @@ router.get('/restaurant/:name', function(req, res) {
 
     biz = biz.split(' ').join('-');
     biz = biz.split('---').join('-');
+    biz = biz.split("'").join("");
 
     console.log(biz);
     var yelp = new Yelp({
@@ -40,7 +41,7 @@ router.get('/restaurant/:name', function(req, res) {
             var row = "";
 
             for(i=0; i<data.reviews.length; i++) {
-                row = "<img src='"+data.reviews[i].rating_image_url+"' style='float:left'><br>";
+                row = "<img src='"+data.reviews[i].rating_image_url+"'><br>";
                 row += "<div style='width:20%'><img src='"+data.reviews[i].user.image_url+"' style='float:left;width:50px;height:50px;margin-right:10px'></div>";
                 row += "<div style='width:80%'><b>"+data.reviews[i].user.name+"</b><br>"+data.reviews[i].excerpt+"</div>";
                 row = row.split('\n').join(' ');
