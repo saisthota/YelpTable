@@ -1,11 +1,10 @@
 chrome.browserAction.onClicked.addListener(function(tab) {
 
             chrome.tabs.sendMessage(tab.id, {
-                    command: "change_title",
-                    title: "hoge"
+                    command: "LoadReviews"
                 },
                 function(msg) {
-                    console.log("result message:", msg);
+                    console.log("Response", msg);
                 });
 
 });
