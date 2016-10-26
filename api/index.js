@@ -17,15 +17,22 @@ router.get('/', function(req, res) {
     res.json({ message: 'Hello' });
 });
 
-router.get('/restaurant/:name', function(req, res) {
+router.get('/restaurant/:name/:area', function(req, res) {
 
     var biz = req.params.name.toLowerCase();
+    var area = req.params.area.toLowerCase();
 
     biz = biz.split(' ').join('-');
     biz = biz.split('---').join('-');
     biz = biz.split("'").join("");
 
+    area = area.split(' ').join('-');
+    area = area.split('---').join('-');
+    area = area.split("'").join("");
+    biz = biz + '-' + area;
+
     console.log(biz);
+    
     var yelp = new Yelp({
         consumer_key: config.getConsumerKey(),
         consumer_secret: config.getConsumerSecret(),
@@ -47,7 +54,6 @@ router.get('/restaurant/:name', function(req, res) {
                 row = row.split('\n').join(' ');
                 response.push(row);
             }
-
             console.log(response);
             res.status(200).json(response);
     });
