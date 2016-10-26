@@ -29,10 +29,16 @@ router.get('/restaurant/:name/:area', function(req, res) {
     area = area.split(' ').join('-');
     area = area.split('---').join('-');
     area = area.split("'").join("");
-    biz = biz + '-' + area;
+
+    console.log(biz.indexOf(area));
+
+    if(biz.indexOf(area) == "-1") {
+        biz = biz + '-' + area;
+    }
+
 
     console.log(biz);
-    
+
     var yelp = new Yelp({
         consumer_key: config.getConsumerKey(),
         consumer_secret: config.getConsumerSecret(),
