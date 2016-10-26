@@ -2,9 +2,6 @@
 chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
     if (msg.command && (msg.command == "change_title")) {
         var biz = $('.page-header-title').text() + ' ' + $( "ul.profile-header-meta-items  li:nth-child(2)" ).text();
-        $("#reviews-summary h3").append(" from Yelp");
-
-
 
         var http = new XMLHttpRequest();
         var url = "http://127.0.0.1:8080/api/restaurant/"+biz;
@@ -12,7 +9,11 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
 
         http.onreadystatechange = function() {
             if (http.readyState == 4 && http.status == 200) {
-                $("#reviews-results").html(http.responseText);
+                var reviewsTitle = $('.page-header-title').text() + ' Ratings and Reviews from Yelp';
+                $("#reviews-summary h3").text(reviewsTitle);
+                var res = JSON.parse(http.responseText);
+                $("#reviews-results").html(res);
+
                 $("#reviews-toolbar").remove();
                 $("#review-pagination").remove();
                 sendResponse("Loading reviews");
